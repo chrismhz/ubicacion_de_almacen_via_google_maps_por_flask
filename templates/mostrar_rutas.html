@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rutas Calculadas</title>
+</head>
+<body>
+    <h1>Rutas Calculadas</h1>
+    <div id="map" style="height: 500px; width: 800px;"></div>
+
+    <!-- Almacenar latitud y longitud como atributos data -->
+    <div id="latitud" data-latitud="{{ latitud }}" style="display: none;"></div>
+    <div id="longitud" data-longitud="{{ longitud }}" style="display: none;"></div>
+
+    <script>
+        function initMap() {
+            // Obtener latitud y longitud desde los atributos data
+            var latitud = parseFloat(document.getElementById('latitud').getAttribute('data-latitud'));
+            var longitud = parseFloat(document.getElementById('longitud').getAttribute('data-longitud'));
+            var almacen = {lat: latitud, lng: longitud};
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: almacen,
+                zoom: 10
+            });
+
+            // Agregar marcadores para representar los nodos
+            var rutas = [
+                // Aquí debes proporcionar la información de las ubicaciones de los nodos
+                // por ejemplo: {lat: 19.984146, lng: -99.519127, nombre: 'Nodo 1'},
+                //              {lat: 19.286168, lng: -99.654733, nombre: 'Nodo 2'},
+                //              ...
+            ];
+
+            rutas.forEach(function(ruta) {
+                var marker = new google.maps.Marker({
+                    position: {lat: ruta.lat, lng: ruta.lng},
+                    map: map,
+                    title: ruta.nombre
+                });
+
+                // Puedes personalizar el marcador, por ejemplo, cambiar el ícono:
+                // marker.setIcon('URL_DEL_ICONO');
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=initMap"></script>
+</body>
+</html>
